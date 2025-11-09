@@ -19,9 +19,6 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/todoapp';
 mongoose.connect(MONGO_URI)
     .then(()=>{
         console.log("Mongo db connected");
-        app.listen(PORT,()=>{
-            console.log(`server started and running on port ${PORT}`);
-        });
     }).catch((error)=>console.error('Mongo db error ', error));
 
 app.get('/test', (req,resp)=>{
@@ -30,3 +27,7 @@ app.get('/test', (req,resp)=>{
 
 app.use('/api/v1/users', UserRoute); //http://localhost:3000/api/v1/users/signup 
 app.use('/api/v1/todos', TodoRoute); 
+
+app.listen(PORT,()=>{
+    console.log(`server started and running on port ${PORT}`);
+});
