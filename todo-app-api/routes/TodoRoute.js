@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const TodoController = require('../controller/TodoController');
-const middleware = require('../middlewares/Middleware');
+const middleware = require('../middleware/Middleware')
 
 router.post('/create',middleware, TodoController.createTodo);
-router.post('/pending',middleware, TodoController.findAllPendingTodos);
-router.post('/completed',middleware, TodoController.findAllCompletedTodos);
-router.post('/find-by-id/:id',middleware, TodoController.findTodoById);
-router.post('/update-status/:id',middleware, TodoController.updateTodoStatus);
-router.post('/update-content/:id',middleware, TodoController.updateTodoContent);
-router.post('/delete-by-id/:id',middleware, TodoController.deleteTodoById);
+router.get('/all',middleware, TodoController.findAllAllTodos);
+router.get('/pending',middleware, TodoController.findAllPendingTodos);
+router.get('/completed',middleware, TodoController.findAllCompletedTodos);
+router.get('/find-by-id/:id',middleware, TodoController.findTodoById);
+router.put('/update-status/:id',middleware, TodoController.updateTodoStatus);
+router.put('/update-content/:id',middleware, TodoController.updateTodoContent);
+router.delete('/delete-by-id/:id',middleware, TodoController.deleteTodoById);
 
 module.exports = router;

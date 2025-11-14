@@ -1,5 +1,5 @@
 {
-  "name": "todo-app-api-mern",
+  "name": "todo-app-api-mern-5",
   "version": "1.0.0",
   "description": "my first app",
   "main": "index.js",
@@ -11,10 +11,10 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
-    "dotenv": "^17.2.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.3",
-    "nodemon": "^3.1.10"
+    "mongoose": "^8.18.0"
   }
 }
