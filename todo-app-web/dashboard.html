@@ -1,12 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="dashboard.html">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/dashboard.css">
 </head>
 <body>
-    
+<div class="header-outer" style="margin-bottom: 50px">
+    <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Todoist_logo.png" alt="">
+    </div>
+    <div class="signup">
+        <button id="btnLogout" class="btn btn-primary btn-sm">Logout</button>
+    </div>
+</div>
+
+<!--==========================-->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        + Add new Todo
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="todoForm">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                            <label for="todoTitle" class="form-lable">Title *</label>
+                            <input type="text" class="form-control" id="todoTitle"/>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="todoDescription" class="form-lable">Description *</label>
+                                <input type="text" class="form-control" id="todoDescription"/>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="todoDueDate" class="form-lable">Due Date *</label>
+                                <input type="datetime-local" class="form-control" id="todoDueDate"/>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Add Todo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+             
+        </div>
+    </div>
+</div>
+<!--==========================-->
+<script>
+    const token = localStorage.getItem('token');
+    if(!token){
+        window.location.href='login.html';
+    }
+
+    document.getElementById('btnLogout').addEventListener('click', function (){
+        localStorage.removeItem('token');
+        window.location.href='index.html';
+    })
+</script>
 </body>
 </html>

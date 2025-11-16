@@ -1,69 +1,77 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/signup.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/signup.css">
 </head>
 <body>
-    <div class="outer">
-        <div class="context">
-            <h4>Register here</h4>
-            <hr>
-            <div class="col-12">
-                <label for="name" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Ex: John Doe">
-            </div>
-            <br>
-            <div class="col-12">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="name@example.com">
-            </div>
-            <br>
-            <div class="col-12">
-
-                <label for="password" class="form-label">Your Password</label>
-                <input type="text" class="form-control" id="password" >
-            </div>
-            <br> 
-            <div class="col-12">
-                <button class="col-12 btn btn-primary btn-sm" id="signup">Sign Up</button>
-            </div>
-            <hr>
-            <div class="col-12">
-                <a href="login.html" class="col-12 btn btn-success btn-sm">Already have an Account</a>
-            </div>
+<div class="outer">
+    <div class="context">
+        <h4>Register here</h4>
+        <hr>
+        <div class="col-12">
+            <label for="name" class="form-label">Full name</label>
+            <input type="text" class="form-control" id="name" placeholder="Ex: Ranil Kumara">
+        </div>
+        <br>
+        <div class="col-12">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com">
+        </div>
+        <br>
+        <div class="col-12">
+            <label for="password" class="form-label">Your Password</label>
+            <input type="text" class="form-control" id="password">
+        </div>
+        <br>
+        <div class="col-12">
+            <button class="col-12 btn btn-primary btn-sm" id="signup">Sign up</button>
+        </div>
+        <hr>
+        <div class="col-12">
+            <a href="login.html" class="col-12 btn btn-dark btn-sm">Already have an Account</a>
         </div>
     </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    document.getElementById('signup').addEventListener('click', function() {
+    const token = localStorage.getItem('token');
+    if(token){
+        window.location.href='dashboard.html';
+    }
+    document.getElementById('signup').addEventListener('click', function () {
         const name = $('#name').val().trim();
         const email = $('#email').val().trim();
         const password = $('#password').val().trim();
 
-        if(!name || !email || !password) {
-            alert('Please fill all the fields.');
+        if (!name || !email || !password) {
+            alert('please fill all fields');
             return;
         }
 
         $.ajax({
-            url: 'http://localhost:3000/api/v1/users/signup',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ name:name, email:email, password:password }),
-            
-            success: function(resp) {
-                alert('Registration successful! Redirecting to login.');
-                window.location.href = 'login.html';
+            url:'http://localhost:3000/api/v1/users/signup',
+            type:'POST',
+            contentType:'application/json',
+            data:JSON.stringify({
+                name:name,email:email,password:password
+            }),
+            success:function (resp){
+                alert('Registration successful! Redirecting to login');
+                window.location.href='login.html';
             },
-            error: function(xhr, status, err) {
+            error: function (xhr, status, err){
                 console.log(err);
-                alert('Registration Faild: ' + (xhr.responseJSON?.message) || "Please try again.");
+                alert('Registration Failed!: '+(xhr.responseJSON?.message) || "please try again")
             }
-        });
+        })
+
     })
 </script>
 </body>
