@@ -34,15 +34,15 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                             <label for="todoTitle" class="form-lable">Title *</label>
-                            <input type="text" class="form-control" id="todoTitle"/>
+                            <input type="text" class="form-control" id="todoTitle" required/>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="todoDescription" class="form-lable">Description *</label>
-                                <input type="text" class="form-control" id="todoDescription"/>
+                                <input type="text" class="form-control" id="todoDescription" required/>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="todoDueDate" class="form-lable">Due Date *</label>
-                                <input type="datetime-local" class="form-control" id="todoDueDate"/>
+                                <input type="datetime-local" class="form-control" id="todoDueDate" required/>
                             </div>
                             <button class="btn btn-primary" type="submit">Add Todo</button>
                         </div>
@@ -51,12 +51,93 @@
             </div>
         </div>
         <div class="col-12">
-             
+             <ul class="nav nav-tabs mb-4" id="todoTabs">
+                <li class="nav-item">
+                    <button type="button" class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all">
+                        All Todos
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending">
+                        Pending
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link active" id="completed-tab" data-bs-toggle="tab" data-bs-target="#completed">
+                        Completed
+                    </button>
+                </li>
+             </ul>
+             <div class="tab-content" id="todoTabContent">
+                <div class="tab-pane fade show active" id="all">
+                    <div id="allTodos"></div>
+                </div>
+                <div class="tab-pane fade" id="all">
+                    <div id="pendingTodos"></div>
+                </div>
+                <div class="tab-pane fade" id="all">
+                    <div id="completedTodos"></div>
+                </div>
+             </div>
         </div>
     </div>
 </div>
+
+<!--edit-todo-model-->
+<div class="model-fade" id="editToolModel" tabIndex="-1">
+    <div class="model-dialog">
+        <div class="model-content">
+            <div class="model-header">
+                <h5 class="model-title">Edit Todo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="model"></button>
+            </div>
+            <div class="model-body">
+                <form id="editTodoForm">
+                    <input type="hidden" id="editTodoId"/>
+                    <div class="col-12">
+                        <label for="editTodoTitle">Title *</label>
+                        <input type="text" class="form-control" id="editTodoTitle" required/>
+                    </div>
+                    <div class="col-12">
+                        <label for="editTodoDescription">Description *</label>
+                        <input type="text" class="form-control" id="editTodoDescription" required/>
+                    </div>
+                    <div class="col-12">
+                        <label for="editTodoDueDate">Due Date *</label>
+                        <input type="datetime-local" class="form-control" id="editTodoDueDate" required/>
+                    </div>
+                </form>
+            </div>
+            <div class="model-footer">
+                <input type="button" value="cancel" ckass="btn btn-secondary" data-bs-dismiss="model">
+                <input type="button" value="Save Changes" ckass="btn btn-custom" onlick="updateTodo()">
+            </div>
+        </div>
+    </div>
+</div>
+<!--edit-todo-model-->
+<div id="loadingSpinner" class="position-fixed top-50 start-50 translate-middle" style="display: none; z-index: 9999">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastMessage" class="toast" role="alert">
+        <div class="toast header">
+            <strong class="me-auto">Notifications</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body" id="toastBody"></div>
+    </div>
+</div>
+
+
 <!--==========================-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
 <script>
+    const baseUrl = 'http://localhost:3000/api/v1';
     const token = localStorage.getItem('token');
     if(!token){
         window.location.href='login.html';
@@ -66,6 +147,10 @@
         localStorage.removeItem('token');
         window.location.href='index.html';
     })
+
+    const updateTodo = function (){
+
+    }
 </script>
 </body>
 </html>
